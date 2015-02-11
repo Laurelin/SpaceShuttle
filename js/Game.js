@@ -29,11 +29,15 @@ BasicGame.Game = function (game) {
 	var player;
 	var crane;
 	var ground;
+	var engines;
 
     //  You can use any of these from any function within this State.
     //  But do consider them as being 'reserved words', i.e. don't create a property for your own game called "world" or you'll over-write the world reference.
 
 };
+
+var sbr = 0;
+var rocketEmitter;
 
 BasicGame.Game.prototype = {
 
@@ -56,6 +60,7 @@ BasicGame.Game.prototype = {
 		ground = this.add.sprite(0, 9216, 'launchPad');
 		crane = this.add.sprite(369, 9892, 'crane');
 		this.camera.setPosition(1024, 10240);
+		this.camera.follow(player);
 		
 		music = this.add.audio('launchMusic');
 
@@ -77,31 +82,43 @@ BasicGame.Game.prototype = {
 		ground.body.immovable = true;
 		ground.body.allowGravity = false;
 		
+		
+		rocketEmitter = this.add.emitter(0, 0, 1000);
+		rocketEmitter.makeParticles('smoke')
+		
+		
 		music.play();
 		this.cursors = this.input.keyboard.createCursorKeys();
 		this.input.keyboard.addKeyCapture([
-        Phaser.Keyboard.LEFT,
-        Phaser.Keyboard.RIGHT,
-        Phaser.Keyboard.UP,
-        Phaser.Keyboard.DOWN
-    ]);
+			Phaser.Keyboard.LEFT,
+			Phaser.Keyboard.RIGHT,
+			Phaser.Keyboard.UP,
+			Phaser.Keyboard.DOWN
+		]);
+	
+		engines = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+		engines.onDown.add(rocketManager, this);
 		
     },
 
     update: function () {
 	
-	this.physics.arcade.collide(player, ground, crash, null, this);
+	this.physics.arcade.collide(player, ground);
 
         //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
-		 if (this.cursors.up.isDown)
+		 if (this.cursors.up.isDown /*&& sbr > 1*/)
 		{
-        this.camera.y -= 10;
+			player.allowGravity = true;
+			player.body.acceleration.y = -accel;
 		}
 		else if (this.cursors.down.isDown)
 		{
         this.camera.y += 10;
 		}
-
+		else
+		{
+			player.body.acceleration.y = 0;
+		}
     },
 
     quitGame: function (pointer) {
@@ -116,7 +133,18 @@ BasicGame.Game.prototype = {
 
 };
 
-function crash(){
 	
-		rotation = 90;
-	};
+function rocketManager(){
+
+	sbr++;
+	
+	switch(sbr){
+		case 1:
+			//create and add smoke emitter to shuttle sprite
+			player.addChild(rocketEmitter);
+			player.frameName = 'shuttlethrust.png';
+			player.x = 486;
+			break;
+			}
+
+};
