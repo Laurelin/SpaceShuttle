@@ -110,6 +110,7 @@ BasicGame.Game.prototype = {
 		{
 			
 			player.allowGravity = true;
+			player.immovable = false;
 			player.body.acceleration.y = -accel;
 		}
 		else if (this.cursors.down.isDown)
