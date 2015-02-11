@@ -47,32 +47,32 @@ BasicGame.Game.prototype = {
 		
 		rotation = 90;
 		accel = 87;
-		vMax = 350;
+		vMax = 450;
 		drag = 25;
 		gravity = 50;
 		
 		this.world.setBounds(0, 0, 1024, 10240);
 		this.physics.startSystem(Phaser.Physics.ARCADE);
+		this.physics.arcade.gravity.y = gravity;
+		
+		this.camera.setPosition(1024, 10240);
 
+		music = this.add.audio('launchMusic');
 		
 		this.add.sprite(0,0, 'launch');
 		player = this.add.sprite(504, 9899, 'shuttle', 'shuttle.png');
 		ground = this.add.sprite(0, 9216, 'launchPad');
 		crane = this.add.sprite(369, 9892, 'crane');
-		this.camera.setPosition(1024, 10240);
 		this.camera.follow(player);
-		
-		music = this.add.audio('launchMusic');
 
 		this.physics.arcade.enable(player);
+		
+		
 		player.body.maxVelocity.setTo(vMax, vMax);
 		player.body.drag.setTo(drag);
-		player.body.immovable = true;
-		player.body.allowGravity = false;
-		
-		this.physics.arcade.gravity.y = gravity;
-		
 		player.body.collideWorldBounds = true;
+		player.allowGravity = false;
+		player.immovable = true;
 		
 		this.physics.arcade.enable(crane);
 		crane.body.immovable = true;
@@ -108,6 +108,7 @@ BasicGame.Game.prototype = {
         //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
 		 if (this.cursors.up.isDown /*&& sbr > 1*/)
 		{
+			
 			player.allowGravity = true;
 			player.body.acceleration.y = -accel;
 		}
