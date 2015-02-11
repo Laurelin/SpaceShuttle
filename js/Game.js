@@ -28,6 +28,7 @@ BasicGame.Game = function (game) {
 	var gravity;
 	var player;
 	var crane;
+	var ground;
 
     //  You can use any of these from any function within this State.
     //  But do consider them as being 'reserved words', i.e. don't create a property for your own game called "world" or you'll over-write the world reference.
@@ -52,7 +53,7 @@ BasicGame.Game.prototype = {
 		
 		this.add.sprite(0,0, 'launch');
 		player = this.add.sprite(504, 9899, 'shuttle', 'shuttle.png');
-		this.add.sprite(0, 9216, 'launchPad');
+		ground = this.add.sprite(0, 9216, 'launchPad');
 		crane = this.add.sprite(369, 9892, 'crane');
 		this.camera.setPosition(1024, 10240);
 		
@@ -62,6 +63,7 @@ BasicGame.Game.prototype = {
 		player.body.maxVelocity.setTo(vMax, vMax);
 		player.body.drag.setTo(drag);
 		player.body.immovable = true;
+		player.body.allowGravity = false;
 		
 		this.physics.arcade.gravity.y = gravity;
 		
@@ -69,6 +71,11 @@ BasicGame.Game.prototype = {
 		
 		this.physics.arcade.enable(crane);
 		crane.body.immovable = true;
+		crane.body.allowGravity = false;
+		
+		this.physics.arcade.enable(ground);
+		ground.body.immovable = true;
+		ground.body.allowGravity = false;
 		
 		music.play();
 		this.cursors = this.input.keyboard.createCursorKeys();
@@ -82,18 +89,25 @@ BasicGame.Game.prototype = {
     },
 
     update: function () {
+	
+	this.physics.arcade.collide(player, ground, crash, null, this);
 
         //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
 		 if (this.cursors.up.isDown)
-    {
+		{
         this.camera.y -= 10;
-    }
-    else if (this.cursors.down.isDown)
-    {
+		}
+		else if (this.cursors.down.isDown)
+		{
         this.camera.y += 10;
-    }
+		}
 
     },
+	
+	crash: function(){
+	
+	
+	},
 
     quitGame: function (pointer) {
 
