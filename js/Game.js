@@ -19,6 +19,8 @@ BasicGame.Game = function (game) {
     this.particles; //  the particle manager (Phaser.Particles)
     this.physics;   //  the physics manager (Phaser.Physics)
     this.rnd;       //  the repeatable random number generator (Phaser.RandomDataGenerator)
+	this.cursors;
+	var music;
 
     //  You can use any of these from any function within this State.
     //  But do consider them as being 'reserved words', i.e. don't create a property for your own game called "world" or you'll over-write the world reference.
@@ -30,12 +32,29 @@ BasicGame.Game.prototype = {
     create: function () {
 
         //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
+		this.world.setBounds(0, 0, 1024, 10240);
+		this.add.sprite(0,0, 'launch');
+		this.add.sprite(0, 9216, 'launchPad');
+		this.camera.setPosition(1024, 10240);
+		
+		music = this.add.audio('launchMusic');
 
+		music.play();
+		this.cursors = this.input.keyboard.createCursorKeys();
+		
     },
 
     update: function () {
 
         //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
+		 if (this.cursors.up.isDown)
+    {
+        this.camera.y -= 10;
+    }
+    else if (this.cursors.down.isDown)
+    {
+        this.camera.y += 10;
+    }
 
     },
 
