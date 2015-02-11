@@ -2,87 +2,87 @@
 
 "OV.png":
 {
-	"frame": {"x":2,"y":2,"w":36,"h":58},
+	"frame": {"x":2,"y":1116,"w":36,"h":58},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":36,"h":58},
 	"sourceSize": {"w":36,"h":58}
 },
-"Shuttle.png":
-{
-	"frame": {"x":40,"y":2,"w":44,"h":100},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":44,"h":100},
-	"sourceSize": {"w":44,"h":100}
-},
 "ShuttleNR.png":
 {
-	"frame": {"x":86,"y":2,"w":44,"h":100},
+	"frame": {"x":48,"y":1014,"w":44,"h":100},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":44,"h":100},
 	"sourceSize": {"w":44,"h":100}
 },
-"shuttleback.png":
+"shuttle.png":
 {
-	"frame": {"x":132,"y":2,"w":44,"h":100},
+	"frame": {"x":2,"y":1014,"w":44,"h":100},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":44,"h":100},
 	"sourceSize": {"w":44,"h":100}
 },
-"shuttlebackNR.png":
+"shuttleA.png":
 {
-	"frame": {"x":178,"y":2,"w":44,"h":100},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":44,"h":100},
-	"sourceSize": {"w":44,"h":100}
-},
-"shuttlebackthrust.png":
-{
-	"frame": {"x":2,"y":104,"w":88,"h":200},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":200},
-	"sourceSize": {"w":88,"h":200}
-},
-"shuttleleft.png":
-{
-	"frame": {"x":92,"y":104,"w":43,"h":100},
+	"frame": {"x":48,"y":912,"w":43,"h":100},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":43,"h":100},
 	"sourceSize": {"w":43,"h":100}
 },
-"shuttleleftthrust.png":
+"shuttleB.png":
 {
-	"frame": {"x":137,"y":104,"w":88,"h":200},
+	"frame": {"x":2,"y":912,"w":44,"h":100},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":200},
-	"sourceSize": {"w":88,"h":200}
+	"spriteSourceSize": {"x":0,"y":0,"w":44,"h":100},
+	"sourceSize": {"w":44,"h":100}
 },
-"shuttleright.png":
+"shuttleC.png":
 {
-	"frame": {"x":2,"y":306,"w":43,"h":100},
+	"frame": {"x":48,"y":810,"w":43,"h":100},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":43,"h":100},
 	"sourceSize": {"w":43,"h":100}
 },
-"shuttlerightthrust.png":
+"shuttleNRB.png":
 {
-	"frame": {"x":47,"y":306,"w":88,"h":200},
+	"frame": {"x":2,"y":810,"w":44,"h":100},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":200},
-	"sourceSize": {"w":88,"h":200}
+	"spriteSourceSize": {"x":0,"y":0,"w":44,"h":100},
+	"sourceSize": {"w":44,"h":100}
 },
 "shuttlethrust.png":
 {
-	"frame": {"x":137,"y":306,"w":88,"h":200},
+	"frame": {"x":2,"y":608,"w":88,"h":200},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":200},
+	"sourceSize": {"w":88,"h":200}
+},
+"shuttlethrustA.png":
+{
+	"frame": {"x":2,"y":406,"w":88,"h":200},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":200},
+	"sourceSize": {"w":88,"h":200}
+},
+"shuttlethrustB.png":
+{
+	"frame": {"x":2,"y":204,"w":88,"h":200},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":200},
+	"sourceSize": {"w":88,"h":200}
+},
+"shuttlethrustC.png":
+{
+	"frame": {"x":2,"y":2,"w":88,"h":200},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":200},
@@ -91,10 +91,10 @@
 "meta": {
 	"app": "http://www.codeandweb.com/texturepacker",
 	"version": "1.0",
-	"image": "Shuttle.png",
+	"image": "shuttle.png",
 	"format": "RGBA8888",
-	"size": {"w":227,"h":508},
+	"size": {"w":94,"h":1176},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:d81664809600ba6f8f861e1968cccf9a:d5188f1d3c36e3e6f8e6b3afad23a1ad:cf6f8a3eb01e92c66eef3e7a053268bd$"
+	"smartupdate": "$TexturePacker:SmartUpdate:d337d7abf442ebf1c4e6491391faa7a7:aecd52fef50bf374d5e1b28bb5321d54:e6beffb85ec007ce690e3305e5a16a9f$"
 }
 }

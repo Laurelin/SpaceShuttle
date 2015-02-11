@@ -21,6 +21,12 @@ BasicGame.Game = function (game) {
     this.rnd;       //  the repeatable random number generator (Phaser.RandomDataGenerator)
 	this.cursors;
 	var music;
+	var rotation;
+	var accel;
+	var drag;
+	var vMax
+	var gravity;
+	var player;
 
     //  You can use any of these from any function within this State.
     //  But do consider them as being 'reserved words', i.e. don't create a property for your own game called "world" or you'll over-write the world reference.
@@ -32,15 +38,37 @@ BasicGame.Game.prototype = {
     create: function () {
 
         //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
+		
+		rotation = 90;
+		accel = 87;
+		vMax = 350;
+		drag = 25;
+		gravity = 50;
+		
 		this.world.setBounds(0, 0, 1024, 10240);
+		this.physics.startSystem(Phaser.Physics.ARCADE);
+
+		
 		this.add.sprite(0,0, 'launch');
+		player = this.add.sprite(504, 9899, 'shuttle', 'shuttle.png');
 		this.add.sprite(0, 9216, 'launchPad');
 		this.camera.setPosition(1024, 10240);
 		
 		music = this.add.audio('launchMusic');
 
+		this.physics.arcade.enable(player);
+		player.body.maxVelocity.setTo(vMax, vMax);
+		player.body.drag.setTo(drag);
+		this.physics.arcade.gravity.y = gravity;
+		
 		music.play();
 		this.cursors = this.input.keyboard.createCursorKeys();
+		this.input.keyboard.addKeyCapture([
+        Phaser.Keyboard.LEFT,
+        Phaser.Keyboard.RIGHT,
+        Phaser.Keyboard.UP,
+        Phaser.Keyboard.DOWN
+    ]);
 		
     },
 
