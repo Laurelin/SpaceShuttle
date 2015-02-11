@@ -52,6 +52,7 @@ BasicGame.Game.prototype = {
 		this.add.sprite(0,0, 'launch');
 		player = this.add.sprite(504, 9899, 'shuttle', 'shuttle.png');
 		this.add.sprite(0, 9216, 'launchPad');
+		this.add.sprite(0, 9216, 'crane');
 		this.camera.setPosition(1024, 10240);
 		
 		music = this.add.audio('launchMusic');
