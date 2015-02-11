@@ -84,7 +84,7 @@ BasicGame.Game.prototype = {
 		
 		
 		rocketEmitter = this.add.emitter(0, 0, 1000);
-		rocketEmitter.makeParticles('smoke')
+		rocketEmitter.makeParticles('holyshit')
 		
 		
 		music.play();
