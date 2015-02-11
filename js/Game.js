@@ -27,6 +27,7 @@ BasicGame.Game = function (game) {
 	var vMax
 	var gravity;
 	var player;
+	var crane;
 
     //  You can use any of these from any function within this State.
     //  But do consider them as being 'reserved words', i.e. don't create a property for your own game called "world" or you'll over-write the world reference.
@@ -52,7 +53,7 @@ BasicGame.Game.prototype = {
 		this.add.sprite(0,0, 'launch');
 		player = this.add.sprite(504, 9899, 'shuttle', 'shuttle.png');
 		this.add.sprite(0, 9216, 'launchPad');
-		this.add.sprite(0, 9216, 'crane');
+		crane = this.add.sprite(369, 9892, 'crane');
 		this.camera.setPosition(1024, 10240);
 		
 		music = this.add.audio('launchMusic');
@@ -60,7 +61,14 @@ BasicGame.Game.prototype = {
 		this.physics.arcade.enable(player);
 		player.body.maxVelocity.setTo(vMax, vMax);
 		player.body.drag.setTo(drag);
+		player.body.immovable = true;
+		
 		this.physics.arcade.gravity.y = gravity;
+		
+		player.body.collideWorldBounds = true;
+		
+		this.physics.arcade.enable(crane);
+		crane.body.immovable = true;
 		
 		music.play();
 		this.cursors = this.input.keyboard.createCursorKeys();
