@@ -29,7 +29,7 @@ BasicGame.Preloader.prototype = {
 		this.load.image('launchPad', 'images/launchpad.png');
 		this.load.image('crane', 'images/crane.png');
 		this.load.atlasJSONHash('playButton', 'images/play_button1.png', 'images/play_button1.json');
-		this.load.atlasJSONHash('shuttle', 'images/shuttle.png', 'images/shuttle.json');
+		this.load.atlasJSONHash('shuttle', 'images/Shuttle.png', 'images/shuttle.json');
 		this.load.audio('titleMusic', ['audio/Jupiter.ogg']);
 		this.load.audio('click', 'audio/click1.wav');
 		this.load.audio('launchMusic', 'audio/launchmusic.mp3');
