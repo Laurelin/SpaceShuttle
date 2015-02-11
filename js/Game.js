@@ -104,9 +104,9 @@ BasicGame.Game.prototype = {
 
     },
 	
-	crash: function(){
+	function crash(){
 	
-	
+		rotation = 90;
 	},
 
     quitGame: function (pointer) {
