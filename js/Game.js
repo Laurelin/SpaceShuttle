@@ -21,7 +21,7 @@ BasicGame.Game = function (game) {
     this.rnd;       //  the repeatable random number generator (Phaser.RandomDataGenerator)
 	this.cursors;
 	var music;
-	var rotation;
+	var angle;
 	var accel;
 	var drag;
 	var vMax
@@ -29,7 +29,7 @@ BasicGame.Game = function (game) {
 	var player;
 	var crane;
 	var ground;
-	var engines;
+	var start = false;
 
     //  You can use any of these from any function within this State.
     //  But do consider them as being 'reserved words', i.e. don't create a property for your own game called "world" or you'll over-write the world reference.
@@ -38,6 +38,8 @@ BasicGame.Game = function (game) {
 
 var sbr = 0;
 var rocketEmitter;
+var rocketEmitter1;
+var timer;
 
 BasicGame.Game.prototype = {
 
@@ -45,9 +47,9 @@ BasicGame.Game.prototype = {
 
         //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
 		
-		rotation = 90;
-		accel = 87;
-		vMax = 450;
+		angle = 40;
+		accel = (87 - 50)*-1; //total acceleration 
+		vMax = 1000;
 		drag = 25;
 		gravity = 50;
 		
@@ -60,19 +62,29 @@ BasicGame.Game.prototype = {
 		music = this.add.audio('launchMusic');
 		
 		this.add.sprite(0,0, 'launch');
-		player = this.add.sprite(504, 9899, 'shuttle', 'shuttle.png');
+		
+		
+		player = this.add.sprite(525, 9948, 'shuttle', 'shuttle.png');
 		ground = this.add.sprite(0, 9216, 'launchPad');
+		rocketEmitter = this.add.emitter(0, 0, 1000);
+		rocketEmitter.makeParticles('holyshit');
+		rocketEmitter1 = this.add.emitter(0, 0, 1000);
+		rocketEmitter1.makeParticles('cloud');
 		crane = this.add.sprite(369, 9892, 'crane');
+		
 		this.camera.follow(player);
-
 		this.physics.arcade.enable(player);
 		
 		
 		player.body.maxVelocity.setTo(vMax, vMax);
 		player.body.drag.setTo(drag);
+		player.body.angularDrag = 35;
 		player.body.collideWorldBounds = true;
-		player.allowGravity = false;
-		player.immovable = true;
+		player.body.bounce.setTo(0.10, 0.10);
+		player.anchor.setTo(0.5, 0.5);
+		
+		player.body.immovable = true;
+		player.body.allowGravity = false;
 		
 		this.physics.arcade.enable(crane);
 		crane.body.immovable = true;
@@ -82,10 +94,10 @@ BasicGame.Game.prototype = {
 		ground.body.immovable = true;
 		ground.body.allowGravity = false;
 		
-		
-		rocketEmitter = this.add.emitter(0, 0, 1000);
-		rocketEmitter.makeParticles('holyshit')
-		
+		rocketEmitter.setAlpha(0.5, 1, 3000);
+		rocketEmitter.gravity = gravity + accel;
+		rocketEmitter1.setAlpha(0.5, 1, 3000);
+		rocketEmitter1.gravity = gravity + accel;
 		
 		music.play();
 		this.cursors = this.input.keyboard.createCursorKeys();
@@ -103,24 +115,54 @@ BasicGame.Game.prototype = {
 
     update: function () {
 	
-	this.physics.arcade.collide(player, ground);
+		rocketEmitter.x = player.x - 20;
+		rocketEmitter.y = player.y + 100;
+		
+		rocketEmitter1.x = player.x + 20;
+		rocketEmitter1.y = player.y + 100;
 
-        //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
-		 if (this.cursors.up.isDown /*&& sbr > 1*/)
+        if(this.cursors.left.isDown && sbr >= 2)
 		{
+			while(timer.seconds < 1)
+			{
+			}
 			
-			player.allowGravity = true;
-			player.immovable = false;
-			player.body.acceleration.y = -accel;
+			player.body.angularVelocity = -angle;
 		}
-		else if (this.cursors.down.isDown)
+		else if(this.cursors.right.isDown && sbr >= 2)
 		{
-        this.camera.y += 10;
+			while(timer.seconds < 1)
+			{
+			}
+			player.body.angularVelocity = angle;
+		}
+		
+		
+		 if (this.cursors.up.isDown && sbr >= 2)
+		{
+			while(timer.seconds < 1)
+			{
+			}
+			start = true;
+			player.immovable = false;
+			player.allowGravity = true;
+			player.body.acceleration.x = Math.sin(-player.rotation) * accel;
+			player.body.acceleration.y = Math.cos(-player.rotation) * accel;
+		}
+		else if (!this.cursors.up.isDown && sbr >= 2)
+		{
+			while(timer.seconds < 1)
+			{
+			}
+			player.body.acceleration.x = Math.sin(-player.rotation) * gravity;
+			player.body.acceleration.y = Math.cos(-player.rotation) * gravity;
 		}
 		else
 		{
 			player.body.acceleration.y = 0;
 		}
+		
+		
     },
 
     quitGame: function (pointer) {
@@ -143,9 +185,17 @@ function rocketManager(){
 	switch(sbr){
 		case 1:
 			//create and add smoke emitter to shuttle sprite
-			player.addChild(rocketEmitter);
+			rocketEmitter.start(false, 4000, 20) 
 			player.frameName = 'shuttlethrust.png';
-			player.x = 486;
+			player.x = 527;
+			player.anchor.setTo(0.5, 0.25);
+			break;
+		case 2:
+			rocketEmitter1.start(false, 4000.20)
+			player.frameName = 'shuttlethrust.png';
+			player.x = 527;
+			player.anchor.setTo(0.5, 0.25);
+			timer = new Phaser.Timer(this, false);
 			break;
 			}
 
