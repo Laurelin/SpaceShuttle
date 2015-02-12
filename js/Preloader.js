@@ -34,7 +34,9 @@ BasicGame.Preloader.prototype = {
 		this.load.atlasJSONHash('shuttle', 'images/Shuttle.png', 'images/shuttle.json');
 		this.load.audio('titleMusic', ['audio/Jupiter.ogg']);
 		this.load.audio('click', 'audio/click1.wav');
+		this.load.audio('dude', 'audio/Narrator.mp3');
 		this.load.audio('launchMusic', 'audio/launchmusic.mp3');
+		this.load.audio('startRocket', 'audio/rocketstart.mp3');
 		//this.load.bitmapFont('caslon', 'fonts/caslon.png', 'fonts/caslon.xml');
 		//	+ lots of other required assets here
 

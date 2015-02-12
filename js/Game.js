@@ -40,6 +40,7 @@ var sbr = 0;
 var rocketEmitter;
 var rocketEmitter1;
 var timer;
+var rocket;
 
 BasicGame.Game.prototype = {
 
@@ -60,6 +61,7 @@ BasicGame.Game.prototype = {
 		this.camera.setPosition(1024, 10240);
 
 		music = this.add.audio('launchMusic');
+		rocket = this.add.audio('startRocket');
 		
 		this.add.sprite(0,0, 'launch');
 		
@@ -121,28 +123,18 @@ BasicGame.Game.prototype = {
 		rocketEmitter1.x = player.x + 20;
 		rocketEmitter1.y = player.y + 100;
 
-        if(this.cursors.left.isDown && sbr >= 2)
+        if(this.cursors.left.isDown&& sbr >= 2)
 		{
-			while(timer.seconds < 1)
-			{
-			}
-			
 			player.body.angularVelocity = -angle;
 		}
 		else if(this.cursors.right.isDown && sbr >= 2)
 		{
-			while(timer.seconds < 1)
-			{
-			}
 			player.body.angularVelocity = angle;
 		}
 		
 		
 		 if (this.cursors.up.isDown && sbr >= 2)
 		{
-			while(timer.seconds < 1)
-			{
-			}
 			start = true;
 			player.immovable = false;
 			player.allowGravity = true;
@@ -151,9 +143,6 @@ BasicGame.Game.prototype = {
 		}
 		else if (!this.cursors.up.isDown && sbr >= 2)
 		{
-			while(timer.seconds < 1)
-			{
-			}
 			player.body.acceleration.x = Math.sin(-player.rotation) * gravity;
 			player.body.acceleration.y = Math.cos(-player.rotation) * gravity;
 		}
@@ -189,13 +178,13 @@ function rocketManager(){
 			player.frameName = 'shuttlethrust.png';
 			player.x = 527;
 			player.anchor.setTo(0.5, 0.25);
+			rocket.play();
 			break;
 		case 2:
 			rocketEmitter1.start(false, 4000.20)
 			player.frameName = 'shuttlethrust.png';
 			player.x = 527;
 			player.anchor.setTo(0.5, 0.25);
-			timer = new Phaser.Timer(this, false);
 			break;
 			}
 

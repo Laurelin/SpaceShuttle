@@ -16,7 +16,9 @@ BasicGame.MainMenu.prototype = {
 
 		this.click = this.add.audio('click');
 		this.music = this.add.audio('titleMusic');
+		this.guy = this.add.audio('dude');
 		this.music.play();
+		this.guy.play();
 		
 
 		this.add.sprite(0, 0, 'titlepage');
@@ -36,6 +38,7 @@ BasicGame.MainMenu.prototype = {
 		//	Ok, the Play Button has been clicked or touched, so let's stop the music (otherwise it'll carry on playing)
 		this.click.play();
 		this.music.stop();
+		this.guy.stop();
 
 		//	And start the actual game
 		this.state.start('Game');
